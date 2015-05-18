@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loooz.dao.PatientMapper">
+    <resultMap type="Patient" id="PatientResult">
+        <id column="pid" property="pid" />
+        <result column="name" property="name" />
+        <result column="idcard" property="idcard" />
+        <result column="cellphone" property="cellphone" />
+    </resultMap>
+    <select id="selectByPid" parameterType="int" resultMap="PatientResult">
+        select * from `patient` where pid = #{pid}
+    </select>
+</mapper>
