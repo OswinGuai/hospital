@@ -3,10 +3,13 @@
  */
 package com.loooz.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.alipay.api.internal.util.StringUtils;
 import com.loooz.bo.User;
 import com.loooz.dao.UserDao;
-import com.loooz.dao.impl.UserDaoImpl;
 import com.loooz.exception.UserOperationException;
 import com.loooz.service.UserService;
 
@@ -16,30 +19,12 @@ import com.loooz.service.UserService;
  * @date 2015年5月14日 下午3:27:32
  *
  */
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
-	private UserDao dao = UserDaoImpl.getInstance();
+	@Resource(name = "userDao")
+	private UserDao dao;
 
-	private UserServiceImpl() {
-	}
-	
-	/**
-     * 防止多线程情况下，构建单例出现问题（加载类的过程线程安全）
-     */
-    private static class Container {
-        private static UserService service = new UserServiceImpl();
-    }
-    
-    /**
-     * 获取实例
-     * @return 单例
-     */
-    public static UserService getInstance() {
-        /**
-         * 惰性加载UserDao实例，避免不必要的资源占用
-         */
-        return Container.service;
-    }
 	
 	/* (non-Javadoc)
 	 * @see com.loooz.service.UserService#getUserByAid(java.lang.String)

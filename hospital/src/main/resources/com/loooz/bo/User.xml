@@ -4,12 +4,12 @@
 
 <mapper namespace="com.loooz.dao.UserMapper">
     <resultMap type="User" id="UserResult">
-        <id column="uid" property="uid" />
+        <id column="aid" property="aid" />
         <result column="name" property="name" />
         <result column="idcard" property="idcard" />
         <result column="cellphone" property="cellphone" />
     </resultMap>
-    <select id="selectByUid" parameterType="int" resultMap="UserResult">
-        select * from `user` where uid = #{uid}
+    <select id="selectByAid" parameterType="String" resultMap="UserResult">
+        select * from `user` where aid = #{aid}
     </select>
 </mapper>

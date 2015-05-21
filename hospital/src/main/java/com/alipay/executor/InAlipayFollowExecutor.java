@@ -7,10 +7,6 @@ package com.alipay.executor;
 import net.sf.json.JSONObject;
 
 import com.alipay.util.AlipayMsgBuildUtil;
-import com.loooz.bo.User;
-import com.loooz.exception.UserOperationException;
-import com.loooz.service.UserService;
-import com.loooz.service.impl.UserServiceImpl;
 
 /**
  * 关注服务窗执行器
@@ -22,11 +18,6 @@ public class InAlipayFollowExecutor implements ActionExecutor {
 
     /** 业务参数 */
     private JSONObject bizContent;
-
-    /**
-     * userService
-     */
-    private UserService userService = UserServiceImpl.getInstance();
     
     public InAlipayFollowExecutor(JSONObject bizContent) {
         this.bizContent = bizContent;
@@ -43,17 +34,6 @@ public class InAlipayFollowExecutor implements ActionExecutor {
         // 这里只是个样例程序，所以这步省略。
         // 直接构造简单响应结果返回
         final String fromUserId = bizContent.getString("FromUserId");
-
-        User user = new User();
-        user.setAid(fromUserId);
-        try {
-            userService.addFollowUser(user);
-        } catch (UserOperationException e) {
-            e.printStackTrace();
-            /**
-             * 添加用户失败，则忽略这次添加
-             */
-        }
         
         return AlipayMsgBuildUtil.buildBaseAckMsg(fromUserId);
     }
