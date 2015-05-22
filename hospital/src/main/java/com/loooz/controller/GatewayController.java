@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.loooz.bo.User;
@@ -36,6 +37,13 @@ public class GatewayController {
 		mv.addObject("spring", "spring mvc");
 		mv.setViewName("index");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/json/{aid}", method = RequestMethod.GET)
+	public @ResponseBody User hiJson(@PathVariable("aid") String aid) {
+		User user = userService.getUserByAid(aid);
+		System.out.println("test---------------");
+		return user;
 	}
 
 }
