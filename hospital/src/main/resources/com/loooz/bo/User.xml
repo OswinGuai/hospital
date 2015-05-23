@@ -1,15 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.loooz.dao.UserMapper">
-    <resultMap type="User" id="UserResult">
-        <id column="aid" property="aid" />
-        <result column="name" property="name" />
-        <result column="idcard" property="idcard" />
-        <result column="cellphone" property="cellphone" />
-    </resultMap>
-    <select id="selectByAid" parameterType="String" resultMap="UserResult">
-        select * from `user` where aid = #{aid}
-    </select>
+	<resultMap id="BaseResultMap" type="com.loooz.bo.User">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="alipay_id" jdbcType="VARCHAR" property="alipayId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="idcard" jdbcType="VARCHAR" property="idcard" />
+		<result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+	</resultMap>
+	<sql id="User_Column_List">
+		id, alipay_id, name, idcard, cellphone
+	</sql>
+	<select id="selectByAid" parameterType="String" resultMap="UserResult">
+		select
+		<include refid="User_Column_List" />
+		from `user` where alipay_id = #{alipayId}
+	</select>
+	<insert id="insert" parameterType="com.loooz.bo.User">
+		insert into user (id, alipay_id, name, idcard, cellphone)
+		values (
+		#{id,jdbcType=BIGINT},
+		#{alipayId,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{idcard,jdbcType=VARCHAR},
+		#{cellphone,jdbcType=VARCHAR})
+	</insert>
+
 </mapper>

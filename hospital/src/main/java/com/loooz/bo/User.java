@@ -15,6 +15,8 @@ public class User extends PersonBase {
 	
 	private String aid;
     
+	private long id;
+	
 	/**
 	 * @return the aid
 	 */
@@ -26,5 +28,17 @@ public class User extends PersonBase {
 	 */
 	public void setAid(String aid) {
 		this.aid = aid;
+	}
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 }

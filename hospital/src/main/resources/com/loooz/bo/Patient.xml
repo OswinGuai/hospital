@@ -4,12 +4,18 @@
 
 <mapper namespace="com.loooz.dao.PatientMapper">
     <resultMap type="Patient" id="PatientResult">
-        <id column="pid" property="pid" />
+        <id column="patient_id" property="pid" />
         <result column="name" property="name" />
         <result column="idcard" property="idcard" />
         <result column="cellphone" property="cellphone" />
+        <result column="alipay_id" property="aid" />
     </resultMap>
-    <select id="selectByPid" parameterType="int" resultMap="PatientResult">
-        select * from `patient` where pid = #{pid}
+    <sql id="Patient_Column_List">
+		patient_id, alipay_id, name, idcard, cellphone
+	</sql>
+    <select id="selectByPid" parameterType="long" resultMap="PatientResult">
+        select
+        <include refid="Patient_Column_List" />
+        from `patient` where patient_id = #{pid}
     </select>
 </mapper>
