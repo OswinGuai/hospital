@@ -1,16 +1,14 @@
 package com.loooz.exception;
 
-public class PatientOperationException extends Exception {
+import com.loooz.constants.ErrorInfo;
+
+public class PatientOperationException extends BaseException {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 3151952609368576057L;
 
-	public PatientOperationException(String errorMsg) {
-        super(errorMsg);
-    }
-    
-    public PatientOperationException(String errorMsg, Throwable e) {
-        super(errorMsg, e);
+	public PatientOperationException(ErrorInfo errorInfo) {
+        super(errorInfo);
     }
 }

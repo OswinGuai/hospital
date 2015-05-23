@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.alipay.api.internal.util.StringUtils;
 import com.loooz.bo.User;
+import com.loooz.constants.ErrorInfo;
 import com.loooz.dao.UserDao;
 import com.loooz.exception.UserOperationException;
 import com.loooz.service.UserService;
@@ -40,10 +41,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void addFollowUser(User user) throws UserOperationException {
         if (StringUtils.isEmpty(user.getAid())) {
-            throw new UserOperationException("用户支付宝ID不能为空");
+            throw new UserOperationException(ErrorInfo.ALIPAY_ID_EMPTY);
         }
         if (dao.selectByAid(user.getAid()) != null) {
-            throw new UserOperationException("不能添加已经存在的用户");
+            throw new UserOperationException(ErrorInfo.CANNOT_ADD_EXISTING_USER);
         }
         dao.addUser(user);
     }
