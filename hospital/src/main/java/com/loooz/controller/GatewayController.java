@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.loooz.bo.User;
 import com.loooz.service.UserService;
+import com.loooz.util.ResultUtil;
+import com.loooz.vo.JsonResult;
 
 @Controller
 public class GatewayController {
@@ -40,10 +42,9 @@ public class GatewayController {
 	}
 	
 	@RequestMapping(value = "/json/{aid}", method = RequestMethod.GET)
-	public @ResponseBody User hiJson(@PathVariable("aid") String aid) {
+	public @ResponseBody JsonResult hiJson(@PathVariable("aid") String aid) {
 		User user = userService.getUserByAid(aid);
-		System.out.println("test---------------");
-		return user;
+		return ResultUtil.parseToView(user);
 	}
 
 }
