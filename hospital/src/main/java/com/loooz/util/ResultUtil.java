@@ -3,6 +3,7 @@
  */
 package com.loooz.util;
 
+import com.loooz.exception.BaseException;
 import com.loooz.vo.JsonResult;
 
 /**
@@ -32,6 +33,13 @@ public class ResultUtil {
         fact.setStatus(0);
         fact.setMsg("success");
         fact.setData(object);
+        return fact;
+    }
+    
+    public static JsonResult parseToView(BaseException e) {
+        JsonResultFact fact = new JsonResultFact();
+        fact.setStatus(e.getErrorCode());
+        fact.setMsg(e.getMessage());
         return fact;
     }
 }
