@@ -13,7 +13,8 @@ public enum ErrorInfo {
 	NON_EXIST_PATIENT(2001,"患者不存在"),
 	NON_EXIST_USER(2002,"用户不存在"),
 	ALIPAY_ID_EMPTY(2003,"用户支付宝ID不能为空"),
-	CANNOT_ADD_EXISTING_USER(2004,"不能添加已经存在的用户");
+	CANNOT_ADD_EXISTING_USER(2004,"不能添加已经存在的用户"),
+	CANNOT_REBIND_PATIENT(2005,"不能给患者重复绑定");
 	
 	private int errorCode;
 	private String msg;
