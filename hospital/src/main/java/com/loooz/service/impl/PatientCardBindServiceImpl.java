@@ -6,11 +6,13 @@ package com.loooz.service.impl;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.loooz.bo.Patient;
 import com.loooz.bo.PatientCardBind;
 import com.loooz.constants.ErrorInfo;
 import com.loooz.dao.PatientCardBindDao;
+import com.loooz.exception.CardOperationException;
 import com.loooz.exception.PatientOperationException;
 import com.loooz.service.PatientCardBindService;
 import com.loooz.service.PatientService;
@@ -35,17 +37,17 @@ public class PatientCardBindServiceImpl implements PatientCardBindService {
 	 * @see com.loooz.service.BindCardService#generateBindCode(long)
 	 */
 	@Override
-	public long generateBindCode(long patientId) throws PatientOperationException {
+	public long generateBindCode(long patientId) throws PatientOperationException, CardOperationException {
 		if (!patientService.checkExists(patientId)) {
 			throw new PatientOperationException(ErrorInfo.NON_EXIST_PATIENT);
 		}
-		if (patientCardBindDao.getBindByPatientId(patientId) != null) {
-			throw new PatientOperationException(ErrorInfo.CANNOT_REBIND_PATIENT);
+		if (patientCardBindDao.selectBindRecordByPatientId(patientId) != null) {
+			throw new CardOperationException(ErrorInfo.CANNOT_REBIND_PATIENT);
 		}
 		PatientCardBind record = new PatientCardBind();
 		record.setPatientId(patientId);
 		patientCardBindDao.insertBindRecord(record);
-		return record.getId();
+		return record.getBindCode();
 	}
 
 	/* (non-Javadoc)
@@ -70,9 +72,14 @@ public class PatientCardBindServiceImpl implements PatientCardBindService {
 	 * @see com.loooz.service.BindCardService#registerCard(long, java.lang.String)
 	 */
 	@Override
-	public void registerCard(long bindCode, String cardId) {
-		// TODO Auto-generated method stub
-
+	public void bindCard(long bindCode, String cardId) throws CardOperationException {
+        
+        PatientCardBind record = patientCardBindDao.selectBindRecordByBindCode(bindCode);
+        if (!StringUtils.isEmpty(record.getCardId())) {
+            throw new CardOperationException(ErrorInfo.CANNOT_REBIND_PATIENT);
+        }
+        record.setCardId(cardId);
+        patientCardBindDao.updateBindRecordByKey(record);
 	}
 
 }

@@ -13,7 +13,11 @@ import com.loooz.bo.PatientCardBind;
  */
 public interface PatientCardBindDao {
 
-	public PatientCardBind getBindByPatientId(long patientId);
+	public PatientCardBind selectBindRecordByPatientId(long patientId);
+	
+	public PatientCardBind selectBindRecordByBindCode(long bindCode);
 	
 	public void insertBindRecord(PatientCardBind record);
+	
+	public void updateBindRecordByKey(PatientCardBind record);
 }

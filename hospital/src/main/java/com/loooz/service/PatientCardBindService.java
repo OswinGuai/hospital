@@ -1,6 +1,7 @@
 package com.loooz.service;
 
 import com.loooz.bo.Patient;
+import com.loooz.exception.CardOperationException;
 import com.loooz.exception.PatientOperationException;
 
 /**
@@ -12,11 +13,11 @@ import com.loooz.exception.PatientOperationException;
  */
 public interface PatientCardBindService {
 
-	public long generateBindCode(long patientId) throws PatientOperationException;
+	public long generateBindCode(long patientId) throws PatientOperationException, CardOperationException;
 	
 	public void unbind(long patientId, String cardId);
 	
 	public Patient getBindPatient(long bindCode);
 	
-	public void registerCard(long bindCode, String cardId);
+	public void bindCard(long bindCode, String cardId) throws CardOperationException;
 }

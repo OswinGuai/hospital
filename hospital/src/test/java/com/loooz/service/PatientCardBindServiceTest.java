@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.loooz.bo.PatientCardBind;
 import com.loooz.dao.PatientCardBindDao;
+import com.loooz.exception.CardOperationException;
 import com.loooz.exception.PatientOperationException;
 import com.loooz.service.impl.PatientCardBindServiceImpl;
 
@@ -74,13 +75,13 @@ public class PatientCardBindServiceTest {
                     return null;
                 }
             }
-        }).when(patientCardBindDao).getBindByPatientId(Mockito.anyLong());
+        }).when(patientCardBindDao).selectBindRecordByPatientId(Mockito.anyLong());
         
         Mockito.doAnswer(new Answer<Object>() {
             public Object answer(InvocationOnMock invocation) {
                 Object[] args = invocation.getArguments();
                 PatientCardBind bind = (PatientCardBind) args[0];
-                bind.setId(333);
+                bind.setBindCode(333);
                 return 0;
             }
         }).when(patientCardBindDao).insertBindRecord(Mockito.any(PatientCardBind.class));
@@ -93,11 +94,13 @@ public class PatientCardBindServiceTest {
         boolean error = false;
         try {
             service.generateBindCode(patientId);
-        } catch (PatientOperationException e) {
+        } catch (CardOperationException e) {
             /**
              * 已经绑定的情况，应该报异常
              */
             error = true;
+        } catch (PatientOperationException e) {
+            error = false;
         }
         Assert.assertTrue(error);
         
@@ -108,8 +111,10 @@ public class PatientCardBindServiceTest {
             id = service.generateBindCode(patientId);
         } catch (PatientOperationException e) {
             /**
-             * 已经绑定的情况，应该报异常
+             * 未绑定的情况，不应该报异常
              */
+            error = true;
+        } catch (CardOperationException e) {
             error = true;
         }
         Assert.assertTrue(!error);

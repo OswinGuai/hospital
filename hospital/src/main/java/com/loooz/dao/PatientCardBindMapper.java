@@ -16,7 +16,11 @@ import com.loooz.bo.PatientCardBind;
 @Repository
 public interface PatientCardBindMapper {
 
-	public PatientCardBind getBindByPatientId(long patientId);
+	public PatientCardBind selectBindRecordByPatientId(long patientId);
+	
+	public PatientCardBind selectBindRecordByBindCode(long bindCode);
 	
 	public void insertBindRecord(PatientCardBind record);
+	
+	public void updateBindRecordByKey(PatientCardBind record);
 }

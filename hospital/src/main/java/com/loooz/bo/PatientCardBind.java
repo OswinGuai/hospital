@@ -17,23 +17,23 @@ public class PatientCardBind implements Serializable {
 	 */
 	private static final long serialVersionUID = -8703147666532066847L;
 
-	private long id;
+	private long bindCode;
 	private long patientId;
 	private String cardId;
 	private Date bindTime;
 	private int state;
 	
 	/**
-	 * @return the id
+	 * @return the bindCode
 	 */
-	public long getId() {
-		return id;
+	public long getBindCode() {
+		return bindCode;
 	}
 	/**
-	 * @param id the id to set
+	 * @param bindCode the bindCode to set
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setBindCode(long bindCode) {
+		this.bindCode = bindCode;
 	}
 	/**
 	 * @return the patientId

@@ -24,11 +24,11 @@ public class PatientCardBindDaoImpl implements PatientCardBindDao {
     private PatientCardBindMapper mapper;
     
     /* (non-Javadoc)
-     * @see com.loooz.dao.PatientCardBindDao#getBindByPatientId(long)
+     * @see com.loooz.dao.PatientCardBindDao#selectBindRecordByPatientId(long)
      */
     @Override
-    public PatientCardBind getBindByPatientId(long patientId) {
-        return mapper.getBindByPatientId(patientId);
+    public PatientCardBind selectBindRecordByPatientId(long patientId) {
+        return mapper.selectBindRecordByPatientId(patientId);
     }
 
     /* (non-Javadoc)
@@ -37,6 +37,16 @@ public class PatientCardBindDaoImpl implements PatientCardBindDao {
     @Override
     public void insertBindRecord(PatientCardBind record) {
         mapper.insertBindRecord(record);
+    }
+
+    @Override
+    public void updateBindRecordByKey(PatientCardBind record) {
+        mapper.updateBindRecordByKey(record);
+    }
+
+    @Override
+    public PatientCardBind selectBindRecordByBindCode(long bindCode) {
+        return mapper.selectBindRecordByBindCode(bindCode);
     }
 
 }
