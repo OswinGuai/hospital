@@ -9,9 +9,11 @@ $(document).ready(function () {
 
                 //获取目标填充下拉列表
                 var suffererList = $("SufferersList");
-                //将数据转成Json对象
-                var result = (new Function("", "return " + data));
-
+                
+                ////如果从服务器端接收到的是字符串并不是JSON,则需要执行ParseJson方法
+                ////将数据转成Json对象
+                ////var result = ParseJson(data);
+                result = data;
                 //清空Select ListItem
                 RemoveOption(suffererList);
 
@@ -163,4 +165,9 @@ function GetContactsList(listid, data, object, name, phone, suffererid) {
     //清空患者列表
 function RemoveContacts(listid) {
     $(listid).find("li").remove();
+}
+
+//将Json转换成对象
+function ParseJson(data){
+    return (new Function("","return " + data))();
 }
