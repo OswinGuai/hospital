@@ -76,6 +76,15 @@ public class PatientCardBindServiceTest {
             }
         }).when(patientCardBindDao).getBindByPatientId(Mockito.anyLong());
         
+        Mockito.doAnswer(new Answer<Object>() {
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                PatientCardBind bind = (PatientCardBind) args[0];
+                bind.setId(333);
+                return 0;
+            }
+        }).when(patientCardBindDao).insertBindRecord(Mockito.any(PatientCardBind.class));
+        
     }
 
     @Test
@@ -91,6 +100,20 @@ public class PatientCardBindServiceTest {
             error = true;
         }
         Assert.assertTrue(error);
+        
+        patientId = 21;
+        error = false;
+        long id = 0;
+        try {
+            id = service.generateBindCode(patientId);
+        } catch (PatientOperationException e) {
+            /**
+             * 已经绑定的情况，应该报异常
+             */
+            error = true;
+        }
+        Assert.assertTrue(!error);
+        Assert.assertTrue(id > 0);
         
     }
 
