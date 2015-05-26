@@ -39,7 +39,7 @@ public class ResultUtil {
     public static JsonResult parseToView(BaseException e) {
         JsonResultFact fact = new JsonResultFact();
         fact.setStatus(e.getErrorCode());
-        fact.setMsg(e.getMessage());
+        fact.setMsg(e.getErrorMsg());
         return fact;
     }
 }
