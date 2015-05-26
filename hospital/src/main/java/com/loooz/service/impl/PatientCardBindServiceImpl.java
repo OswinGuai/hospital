@@ -5,6 +5,8 @@ package com.loooz.service.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.loooz.bo.Patient;
 import com.loooz.bo.PatientCardBind;
 import com.loooz.constants.ErrorInfo;
@@ -19,6 +21,7 @@ import com.loooz.service.PatientService;
  * @date 2015年5月23日 下午4:52:49
  *
  */
+@Service("patientCardBindService")
 public class PatientCardBindServiceImpl implements PatientCardBindService {
 
 	@Resource
