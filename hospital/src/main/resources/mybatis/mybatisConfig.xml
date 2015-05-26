@@ -3,10 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases> 
-        <typeAlias alias="User" type="com.loooz.bo.User"/> 
+        <typeAlias alias="User" type="com.loooz.bo.User"/>
+        <typeAlias alias="Patient" type="com.loooz.bo.Patient"/> 
     </typeAliases> 
     
     <mappers>
         <mapper resource="com/loooz/bo/User.xml"/>
+        <mapper resource="com/loooz/bo/Patient.xml"/>
     </mappers>
 </configuration>

@@ -1,6 +1,11 @@
 package com.loooz.service;
 
+import java.util.List;
+
+import net.sf.json.JSONObject;
+
 import com.loooz.bo.Patient;
+import com.loooz.exception.PatientOperationException;
 
 /**
  * 
@@ -11,9 +16,13 @@ import com.loooz.bo.Patient;
  */
 public interface PatientService {
 
-	public void addPatient(Patient patient);
+	public void addPatient(Patient patient) throws PatientOperationException;
 	
 	public boolean checkExists(long patientId);
 	
 	public Patient getPatientById(long patientId);
+	
+	public void updatePatient(JSONObject p) throws PatientOperationException;
+	
+	public List<Patient> getAllPatientInfo();
 }

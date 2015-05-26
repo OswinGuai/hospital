@@ -17,10 +17,12 @@ public class PersonBase implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5408573367536878048L;
-
+	/*姓名*/
 	private String name;
-    private String idcard;
-    private int cellphone;
+    //身份证号
+	private String idcard;
+    //手机号
+	private String cellphone;
     
 	/**
 	 * @return the name
@@ -49,13 +51,13 @@ public class PersonBase implements Serializable {
 	/**
 	 * @return the cellphone
 	 */
-	public int getCellphone() {
+	public String getCellphone() {
 		return cellphone;
 	}
 	/**
 	 * @param cellphone the cellphone to set
 	 */
-	public void setCellphone(int cellphone) {
+	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
     

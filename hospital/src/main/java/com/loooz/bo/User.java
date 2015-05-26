@@ -13,8 +13,10 @@ public class User extends PersonBase {
 	 */
 	private static final long serialVersionUID = -5559766321608124602L;
 	
+	//支付宝ID
 	private String aid;
     
+	//用户ID
 	private long id;
 	
 	/**

@@ -18,4 +18,29 @@
         <include refid="Patient_Column_List" />
         from `patient` where patient_id = #{pid}
     </select>
+    
+    <insert id="addPatient" parameterType="com.loooz.bo.Patient">		
+    	insert into patient (patient_id , alipay_id, name, idcard, cellphone)
+		values (
+		#{pid,jdbcType=BIGINT},
+		#{aid,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{idcard,jdbcType=VARCHAR},
+		#{cellphone,jdbcType=VARCHAR})
+    </insert>
+    
+    <update id="updatePatientInfo" parameterType="com.loooz.bo.Patient">
+    	update patient set 
+		alipay_id = #{aid,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		idcard = #{idcard,jdbcType=VARCHAR},
+		cellphone =#{cellphone,jdbcType=VARCHAR}
+		where patient_id = #{pid,jdbcType=BIGINT}
+    </update>
+    
+    <select id="getPatientList" resultMap="PatientResult">
+    	select 
+    	<include refid="Patient_Column_List"></include>
+    	from patient
+    </select>
 </mapper>

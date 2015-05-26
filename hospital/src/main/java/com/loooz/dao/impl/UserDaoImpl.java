@@ -26,7 +26,6 @@ public class UserDaoImpl implements UserDao {
 	/* (non-Javadoc)
 	 * @see com.loooz.dao.UserDao#selectByAid(java.lang.String)
 	 */
-	@Override
 	public User selectByAid(String aid) {
         User user = userOperation.selectByAid(aid);
         return user;
@@ -35,7 +34,6 @@ public class UserDaoImpl implements UserDao {
 	/* (non-Javadoc)
 	 * @see com.loooz.dao.UserDao#addUser(com.loooz.bo.User)
 	 */
-	@Override
 	public void addUser(User user) {
         userOperation.addUser(user);
     }

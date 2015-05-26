@@ -22,11 +22,13 @@ public abstract class JsonResult implements Serializable{
     
     private String msg;
     
+    
+    
     /**
      * 数据部分用data
      */
     private Object data;
-
+   
     /**
      * @return the status
      */
