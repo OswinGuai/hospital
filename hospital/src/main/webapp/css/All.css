@@ -1,0 +1,85 @@
+/*Common CSS*/
+
+body {
+    font-size: 2em;
+    font-family: '微软雅黑';
+}
+
+ul {
+    list-style: none;
+}
+
+.MarginTop2E {
+    margin-top: 2em;
+}
+
+.MarginLeft1E {
+    margin-left: 1em;
+}
+
+.Left {
+    float: left;
+}
+
+.Right {
+    float: right;
+}
+
+.BorderTopGray {
+    border-top: 1px solid #ccc;
+}
+
+.Success {
+    display: none;
+    text-align: center;
+}
+
+.FormError {
+    font-size: 14px;
+    color: red;
+    display: none;
+}
+/*Contants.html*/
+
+.Contacts ul {
+    background: #fff;
+    min-height: 50px;
+    display: block;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.ContactList li {
+    padding: 0.5em 0.5em 0.5em 0;
+    background: url(../images/ListRight.png) right no-repeat;
+    background-size: 18px;
+}
+
+.ContactList li .ContactName {
+    display: table-cell;
+    width: 60%;
+}
+
+.ContactList li .ContactPhone {
+    display: table-cell;
+    text-align: right;
+}
+
+.ContactList li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    clear: both;
+}
+
+.ContactList li:not(:last-child) {
+    border-bottom: 1px #ccc solid;
+}
+
+.btnAdd,
+.btnModify,
+.btnDelete {
+    display: none;
+}

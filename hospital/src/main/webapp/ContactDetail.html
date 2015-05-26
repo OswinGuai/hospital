@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="bootstrap-3.3.4\css\bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css\All.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form>
+        <div class="MarginTop2E Contacts">
+            <div class="input-group list-group">
+                <input type="hidden" value="" id="ContactId" />
+                <span class="input-group-addon">患者姓名</span>
+                <input type="text" id="ContactName" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group list-group">
+                <span class="input-group-addon">证件号码</span>
+                <input type="text" id="ContactIdCard" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group list-group">
+                <span class="input-group-addon">手机号码</span>
+                <input type="text" id="ContactPhone" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            </div>
+            <div class="FormError list-group">请完整填写信息</div>
+        </div>
+        <button type="button" class="btn btn-success btn btn-lg btn-block btnAdd" onclick="AddContact();">添加</button>
+        <button type="button" class="btn btn-success btn btn-lg btn-block btnModify" onclick="ModifyContact();">修改</button>
+        <button type="button" class="btn btn-danger btn btn-lg btn-block btnDelete" onclick="DeleteContact();">删除</button>
+    </form>
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/FormAjax.js" type="text/javascript"></script>
+    <script src="js/ContactDetail.js" type="text/javascript"></script>
+    <script src="bootstrap-3.3.4/js/bootstrap.min.js"></script>
+</body>
+
+</html>
