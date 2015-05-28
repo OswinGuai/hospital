@@ -15,7 +15,7 @@ public class MenuUrlConfig {
 
     public static String PREFIX = "loooz_";
     
-    public static String BASE_URL = "http://110.249.163.146:8080/hospital/";
+    public static String BASE_URL = "http://110.249.163.146:8081/hospital/";
     
     private enum Config {
         
