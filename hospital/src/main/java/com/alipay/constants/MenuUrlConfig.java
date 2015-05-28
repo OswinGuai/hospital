@@ -19,7 +19,7 @@ public class MenuUrlConfig {
     
     private enum Config {
         
-        REGISTER("register", "registration.html"),
+        REGISTER("register", "Registration.html"),
         COMING("coming", "coming.html");
         
         private String key;
