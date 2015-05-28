@@ -27,13 +27,13 @@ public class AlipayPageBuildUtil {
         sb.append("<AppId><![CDATA[" + AlipayServiceEnvConstants.APP_ID + "]]></AppId>");
         sb.append("<CreateTime>" + Calendar.getInstance().getTimeInMillis() + "</CreateTime>");
         sb.append("<MsgType><![CDATA[image-text]]></MsgType>");
-        sb.append("<ShowType >open_direct</ShowType>");
+        sb.append("<ShowType ><![CDATA[open_direct]]></ShowType>");
         sb.append("<ArticleCount>1</ArticleCount>");
         sb.append("<Articles>");
         sb.append("<Item>");
         sb.append("<Title><![CDATA[NO_SENSE]]></Title>");
         sb.append("<Desc><![CDATA[NO_SENSE]]></Desc>");
-        sb.append("<ImageUrl><![CDATA[NO_SENSE]]></ImageUrl>");
+        sb.append("<ImageUrl><![CDATA[http://alipay.com/ima/2013.jpg]]></ImageUrl>");
         sb.append("<Url><![CDATA[" + url + "]]></Url>");
         sb.append("</Item>");
         sb.append("</Articles>");

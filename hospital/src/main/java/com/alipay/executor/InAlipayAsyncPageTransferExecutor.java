@@ -31,7 +31,7 @@ public class InAlipayAsyncPageTransferExecutor implements ActionExecutor {
         
         final String actionParam = bizContent.getString("ActionParam");
 
-        String url = MenuUrlConfig.getUrlByMenuId(actionParam);
+        String url = MenuUrlConfig.getUrlByMenuId(actionParam, fromUserId);
         
         String syncResponseMsg = AlipayPageBuildUtil.buildPageTransferResponse(fromUserId, url);
 
