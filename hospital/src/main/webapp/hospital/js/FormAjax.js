@@ -32,9 +32,8 @@ $(document).ready(function () {
                     if (dataResult.data instanceof Array) {
 
                     } else {
-
+                        result = data;
                     }
-
                 }
             } else {
                 getDataStatus = "1";
@@ -43,9 +42,31 @@ $(document).ready(function () {
         }
     });
 
+    result = {
+        "status": "0",
+        "msg": "sucess",
+        "data": [{
+            id: "111",
+            name: "dfjak",
+            cellphone: "1818181818",
+            idcard: "29348388384"
+}]
+    };
+
     //如果返回状态正常获取数据并操作
     if (getDataStatus == "0") {
-        
+        var suffererList = $("#SufferersList");
+        //获取Sufferer数据填充下拉列表
+        FillSelectData(suffererList, result, "data", "id", "name");
+        //通过隐藏域取值
+        $(suffererList).change(function () {
+            //取得选中的文本值
+            var selectText = $(this).find("option:selected").text();
+            $("#suffererCurr").attr("data-value", selectText);
+            //获取选中的value值
+            var selectVlaue = $(this).find("option:selected").val();
+            $("#suffererCurr").attr("data-key", selectVlaue);
+        });
     }
 
     /*//患者列表测试数据结构
