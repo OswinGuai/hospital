@@ -16,7 +16,8 @@ public enum ErrorInfo {
 	CANNOT_ADD_EXISTING_USER(2004,"不能添加已经存在的用户"),
 	CANNOT_REBIND_PATIENT(2005,"不能给患者重复绑定"),
 	CANNOT_ADD_PATIENT(3005,"注册不成功"),
-    ADD_PATIENT_SUCCESS(3006,"注册成功");
+    ADD_PATIENT_SUCCESS(3006,"注册成功"),
+	NON_EXIST_DIAGNOSE_RECORD(4001,"就诊记录不存在");
 	
 	
 	private int errorCode;

@@ -15,6 +15,7 @@ import com.alipay.constants.AlipayServiceEventConstants;
 import com.alipay.constants.AlipayServiceNameConstants;
 import com.alipay.executor.ActionExecutor;
 import com.alipay.executor.InAlipayAsyncMsgSendExecutor;
+import com.alipay.executor.InAlipayAsyncPageTransferExecutor;
 import com.alipay.executor.InAlipayChatTextExecutor;
 import com.alipay.executor.InAlipayDIYQRCodeEnterExecutor;
 import com.alipay.executor.InAlipayDefaultExecutor;
@@ -95,20 +96,18 @@ public class Dispatcher {
             throw new MyException("无法取得事件类型");
         }
 
-        // 2.根据事件类型再次区分服务类型
-        // 2.1 激活验证开发者模式
         if (AlipayServiceNameConstants.ALIPAY_CHECK_SERVICE.equals(service)
             && eventType.equals(AlipayServiceEventConstants.VERIFYGW_EVENT)) {
 
             return new InAlipayVerifyExecutor();
-
-            // 2.2 其他消息通知类 
         } else if (AlipayServiceNameConstants.ALIPAY_PUBLIC_MESSAGE_NOTIFY.equals(service)) {
 
             return getMsgNotifyExecutor(eventType, bizContentJson);
-
-            // 2.3 对于后续支付宝可能新增的类型，统一默认返回AKC响应
+        } else if (eventType.equals(AlipayServiceEventConstants.CLICK_EVENT)) {
+        
+            return new InAlipayAsyncPageTransferExecutor(bizContentJson);
         } else {
+            
             return new InAlipayDefaultExecutor(bizContentJson);
         }
     }
