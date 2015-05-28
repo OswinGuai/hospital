@@ -13,6 +13,7 @@ import com.alipay.api.internal.util.StringUtils;
 import com.alipay.common.MyException;
 import com.alipay.constants.AlipayServiceEventConstants;
 import com.alipay.constants.AlipayServiceNameConstants;
+import com.alipay.constants.MenuUrlConfig;
 import com.alipay.executor.ActionExecutor;
 import com.alipay.executor.InAlipayAsyncMsgSendExecutor;
 import com.alipay.executor.InAlipayAsyncPageTransferExecutor;
@@ -103,9 +104,6 @@ public class Dispatcher {
         } else if (AlipayServiceNameConstants.ALIPAY_PUBLIC_MESSAGE_NOTIFY.equals(service)) {
 
             return getMsgNotifyExecutor(eventType, bizContentJson);
-        } else if (eventType.equals(AlipayServiceEventConstants.CLICK_EVENT)) {
-        
-            return new InAlipayAsyncPageTransferExecutor(bizContentJson);
         } else {
             
             return new InAlipayDefaultExecutor(bizContentJson);
@@ -188,6 +186,10 @@ public class Dispatcher {
 
         String actionParam = bizContentJson.getString("ActionParam");
 
+        if (!StringUtils.isEmpty(actionParam) && actionParam.startsWith(MenuUrlConfig.PREFIX)) {
+            return new InAlipayAsyncPageTransferExecutor(bizContentJson);
+        }
+        
         if ("authentication".equals(actionParam)) {
 
             //申请开发者会员绑定事件:  actionParam支付宝服务窗固定值

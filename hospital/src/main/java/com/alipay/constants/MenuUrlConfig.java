@@ -13,6 +13,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class MenuUrlConfig {
 
+    public static String PREFIX = "loooz_";
+    
     public static String BASE_URL = "http://110.249.163.146:8080/hospital/";
     
     private enum Config {
