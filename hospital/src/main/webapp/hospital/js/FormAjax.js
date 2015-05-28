@@ -1,36 +1,54 @@
 $(document).ready(function () {
-    /*    $.ajax({
-            //url 数据获取的目标地址
-            url: "",
-            type: "Post",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (data) {
+    var getDataStatus = "0";
+    var result;
+    $.ajax({
+        //url 数据获取的目标地址
+        url: "",
+        type: "Post",
+        data: {
+            parameterName1: "parameterValue1",
+            parameterName2: "parameterValue2"
+        },
+        contentType: "application/json",
+        dataType: "json",
+        success: function (dataResult) {
+            /*//Data 标准格式
+            var data = {
+                status: 0,
+                msg: "",
+                data: {
+                }
+            }*/
 
-                //获取目标填充下拉列表
-                var suffererList = $("SufferersList");
-                
-                ////如果从服务器端接收到的是字符串并不是JSON,则需要执行ParseJson方法
-                ////将数据转成Json对象
-                ////var result = ParseJson(data);
-                result = data;
-                //清空Select ListItem
-                RemoveOption(suffererList);
+            //返回状态正常执行True，状态异常执行False
+            if (dataResult.status == "0") {
+                if (typeof (dataResult.data) == "string") {
+                    result = data;
+                    ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
+                    ////将数据转成Json对象
+                    ////var result = ParseJson(data);
+                } else if (typeof (dataResult.data) == "object") {
+                    //当data是数组时执行True,是Json时执行False
+                    if (dataResult.data instanceof Array) {
 
-                //添加默认节点
-                suffererList.append("<option value='-1'>--请选择患者--</option>");
+                    } else {
 
-                var suffererName = "";
-                var suffererId = "";
-                $(result.sufferers).each(function (key) {
-                    suffererName = result.sufferers[key].SuffererName;
-                    suffererId = result.sufferers[key].SuffererId;
-                    AppendOption($("#SufferersList"), suffererId, suffererName);
-                });
+                    }
+
+                }
+            } else {
+                getDataStatus = "1";
+                alert(dataResult.msg);
             }
-        });*/
+        }
+    });
 
-    //患者列表测试数据结构
+    //如果返回状态正常获取数据并操作
+    if (getDataStatus == "0") {
+        
+    }
+
+    /*//患者列表测试数据结构
     var SuffererListResult = {
         "sufferers": [{
                 "SuffererId": "1",
@@ -96,7 +114,7 @@ $(document).ready(function () {
     });
 
     var contactList = $("#ContactList");
-    GetContactsList(contactList, SuffererListResult, "sufferers", "SuffererName", "SuffererPhone", "SuffererId");
+    GetContactsList(contactList, SuffererListResult, "sufferers", "SuffererName", "SuffererPhone", "SuffererId");*/
 
 
 });
@@ -168,6 +186,6 @@ function RemoveContacts(listid) {
 }
 
 //将Json转换成对象
-function ParseJson(data){
-    return (new Function("","return " + data))();
+function ParseJson(data) {
+    return (new Function("", "return " + data))();
 }
