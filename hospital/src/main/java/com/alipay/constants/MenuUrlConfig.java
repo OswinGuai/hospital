@@ -43,7 +43,7 @@ public class MenuUrlConfig {
     
     public static String getUrlByMenuId(String key, String userId) {
         for (Config config : Config.values()) {
-            if (StringUtils.equals(config.key, key)) {
+            if (StringUtils.equals(PREFIX + config.key, key)) {
                 return BASE_URL + config.url + "?userId=" + userId;
             }
         }
