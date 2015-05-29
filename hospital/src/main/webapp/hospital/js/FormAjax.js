@@ -4,7 +4,7 @@ $(document).ready(function () {
     $.ajax({
         //url 数据获取的目标地址
         url: "",
-        type: "Post",
+        type: "GET",
         data: {
             parameterName1: "parameterValue1",
             parameterName2: "parameterValue2"
@@ -176,7 +176,7 @@ function SaveData() {
     $.ajax({
         //url 将数据提交给服务器端
         url: "",
-        type: "Post",
+        type: "GET",
         contentType: "application/json",
         dataType: "json",
         success: function (data) {
@@ -201,7 +201,8 @@ function GetContactsList(listid, data, object, name, phone, suffererid) {
             listid.append("<li><a href='ContactDetail.html?ContactId=" + data[object][key][suffererid] + "&action=view'><span class='ContactName'>" + ContactName + "</span><span class='ContactPhone'>" + ContactPhone + "</span></a></li>");
         });
     }
-    //清空患者列表
+
+//清空患者列表
 function RemoveContacts(listid) {
     $(listid).find("li").remove();
 }

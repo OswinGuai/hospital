@@ -25,4 +25,7 @@ public interface PatientService {
 	public void updatePatient(JSONObject p) throws PatientOperationException;
 	
 	public List<Patient> getAllPatientInfo();
+	
+	//
+	public List<Patient> getPatientListByAid(String aid);
 }

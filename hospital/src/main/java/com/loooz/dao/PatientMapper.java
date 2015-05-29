@@ -18,4 +18,6 @@ public interface PatientMapper {
     
     public List<Patient> getPatientList();
     
+    public List<Patient> getPatientListByAid(String aid);
+    
 }

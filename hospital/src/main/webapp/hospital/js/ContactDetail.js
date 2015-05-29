@@ -20,20 +20,23 @@ function AddContact() {
     var ContactIdCard = $("#ContactIdCard").val();
     var ContactPhone = $("#ContactPhone").val();
     var NewContact = {
-        "ContactName": ContactName,
-        "ContactIdCard": ContactIdCard,
-        "ContactPhone": ContactPhone
+        "name": ContactName,
+        "idcard": ContactIdCard,
+        "cellphone": ContactPhone
     };
-
+    var param = JSON.stringify(NewContact);
+    NewContact = {"pinfo":param};
+    alert(NewContact);
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
-            url: "",
+            url: "http://110.249.163.146:8081/regiserPatient",
             data: NewContact,
-            type: "Post",
-            dataType: 'text',
+            type: "Get",
+            dataType: 'json',
             success: function (msg) {
-                if (msg == '1') {
-                    //console.log('添加成功');
+                if (msg.status == 0) {
+                	alert(msg.data);
+                	window.history.back();
                 } else {
                     //console.log('添加失败')
                 }
@@ -50,7 +53,7 @@ function DeleteContact() {
     $.ajax({
         url: "",
         data: ContactId,
-        type: "Post",
+        type: "GET",
         dataType: 'text',
         success: function (msg) {
             if (msg == '1') {
@@ -79,7 +82,7 @@ function ModifyContact() {
         $.ajax({
             url: "",
             data: NewContact,
-            type: "Post",
+            type: "GET",
             dataType: 'text',
             success: function (msg) {
                 if (msg == '1') {

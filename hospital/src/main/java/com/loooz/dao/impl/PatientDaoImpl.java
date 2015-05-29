@@ -67,6 +67,19 @@ public class PatientDaoImpl implements PatientDao {
         return pList;
     }
 
+    /* (non-Javadoc)
+     * @see com.loooz.dao.PatientDao#getPatientListById(java.lang.String)
+     * 获取同一aid下的所有患者
+     */
+    @Override
+    public List<Patient> getPatientListById(String aid) {
+        // TODO Auto-generated method stub
+        
+        List<Patient> patientListAid = patientOperation.getPatientListByAid(aid);
+        
+        return patientListAid;
+    }
+
     
     
     

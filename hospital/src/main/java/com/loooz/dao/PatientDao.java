@@ -19,5 +19,9 @@ public interface PatientDao {
     
     //获取所有病人
     public List<Patient> getPatientList();
+    
+    //获取同一aliPay_id下的患者 列表
+    public List<Patient> getPatientListById(String aid);
+    
    
 }

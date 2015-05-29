@@ -111,9 +111,21 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<Patient> getAllPatientInfo() {
         // TODO Auto-generated method stub
-        
         List<Patient> plist = patientDao.getPatientList();
         return plist;
+    }
+
+    /* (non-Javadoc)
+     * @see com.loooz.service.PatientService#getPatientListByAid(java.lang.String)
+     * 获取同一aid下的所有患者
+     */
+    @Override
+    public List<Patient> getPatientListByAid(String aid) {
+        // TODO Auto-generated method stub
+        
+        List<Patient> patientListAid = patientDao.getPatientListById(aid);
+        
+        return patientListAid;
     }
 
     

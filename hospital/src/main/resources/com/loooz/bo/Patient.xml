@@ -43,4 +43,11 @@
     	<include refid="Patient_Column_List"></include>
     	from patient
     </select>
+    
+    <select id="getPatientListByAid" parameterType="String" resultMap="PatientResult">
+    	select
+    	<include refid="Patient_Column_List"></include>
+    	from patient where alipay_id = #{aid,jdbcType=VARCHAR}
+    </select>
+    
 </mapper>

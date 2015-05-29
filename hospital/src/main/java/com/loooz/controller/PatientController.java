@@ -3,15 +3,10 @@ package com.loooz.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
-import org.springframework.http.HttpRequest;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alipay.api.internal.util.StringUtils;
 import com.loooz.bo.Patient;
-import com.loooz.constants.ErrorInfo;
-import com.loooz.exception.BaseException;
 import com.loooz.exception.PatientOperationException;
 import com.loooz.service.PatientService;
 import com.loooz.util.ResultUtil;
@@ -37,9 +29,11 @@ public class PatientController {
     
     
     //注册
-    //info={name：？，cellphone：？，idcard:?,aid:?}
+    // http://110.249.163.146:8081/Hospital/regiserPatient?info={name：？，cellphone：？，idcard:?,aid:?}
     @RequestMapping(value = "/regiserPatient",method=RequestMethod.GET)
     public @ResponseBody JsonResult regiserPatinet(@RequestParam("pinfo")String patient){
+        
+        System.out.println("注册信息："+patient);
         
         JSONObject pInfoJson = JSONObject.fromObject(patient);
         
@@ -98,6 +92,18 @@ public class PatientController {
        List<Patient> data = patientService.getAllPatientInfo(); 
        JsonResult res = ResultUtil.parseToView(data);
        return res;
+    }
+    
+    @RequestMapping(value="/getListByAid/{aid}")
+    public @ResponseBody JsonResult getPatientListByAid(@PathVariable("aid")String aid){
+        System.out.println(aid);
+        Assert.notNull(aid, "aid为空");
+        Assert.hasLength(aid, "aid不能为空");
+        
+        List<Patient> pListByAid = patientService.getPatientListByAid(aid);
+        
+        JsonResult res = ResultUtil.parseToView(pListByAid); 
+        return res;
     }
     
     @RequestMapping(value="/patienttest",method=RequestMethod.GET)
