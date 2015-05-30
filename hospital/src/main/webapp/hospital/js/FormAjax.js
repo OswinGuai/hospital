@@ -276,7 +276,7 @@ function RemoveOption(ListId) {
 
 //给指定的 Select 添加键值
 function AppendOption(ListId, value, displayText, defaultSelectId) {
-    if (value == defaultSelectId && ListId.Attr("id") == "DepartmentList") {
+    if (value == defaultSelectId && ListId.attr("id") == "DepartmentList") {
         ListId.append("<option selected='selected' value='" + value + "'>" + displayText + "</option>");
     } else {
         ListId.append("<option value='" + value + "'>" + displayText + "</option>");
