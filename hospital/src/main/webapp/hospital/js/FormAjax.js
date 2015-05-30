@@ -39,7 +39,7 @@ $(document).ready(function () {
                 //如果返回状态正常获取数据并操作
                 var suffererList = $("#SufferersList");
                 //获取Sufferer数据填充下拉列表
-                FillSelectData(suffererList, result, "id", "name");
+                FillSelectData(suffererList, result, "aid", "name");
                 //通过隐藏域取值
                 $(suffererList).change(function () {
                     //取得选中的文本值
