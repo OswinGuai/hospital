@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var getDataStatus = "1";
+    var getDataStatus = 0;
     var result;
     if (GetQueryString("userId")) {
         UserId = GetQueryString("userId");
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 }
             }*/
             //返回状态正常执行True，状态异常执行False
-            if (dataResult.status == "0") {
+            if (dataResult.status == 0) {
                 if (typeof (dataResult.data) == "string") {
                     result = dataResult.data;
                     ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     }
                 }
             } else {
-                getDataStatus = "1";
+                getDataStatus = 1;
                 alert(dataResult.msg);
             }
         }
@@ -54,10 +54,10 @@ $(document).ready(function () {
     };*/
 
     //如果返回状态正常获取数据并操作
-    if (getDataStatus == "0") {
+    if (getDataStatus == 0) {
         var suffererList = $("#SufferersList");
         //获取Sufferer数据填充下拉列表
-        FillSelectData(suffererList, result.data, "id", "name");
+        FillSelectData(suffererList, result, "id", "name");
         //通过隐藏域取值
         $(suffererList).change(function () {
             //取得选中的文本值

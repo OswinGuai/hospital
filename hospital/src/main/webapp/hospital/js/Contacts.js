@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var getDataStatus = "0";
+    var getDataStatus = 0;
     var result;
     if (GetQueryString("userId")) {
         UserId = GetQueryString("userId");
@@ -15,7 +15,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function (dataResult) {
             //返回状态正常执行True，状态异常执行False
-            if (dataResult.status == "0") {
+            if (dataResult.status == 0) {
                 if (typeof (dataResult.data) == "string") {
                     result = dataResult.data;
                     ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
@@ -30,12 +30,12 @@ $(document).ready(function () {
                     }
                 }
             } else {
-                getDataStatus = "1";
+                getDataStatus = 1;
                 alert(dataResult.msg);
             }
         }
     });
-    GetContactsList($("#ContactList"), result.data, "name", "idcard", "id");
+    GetContactsList($("#ContactList"), result, "name", "idcard", "id");
 });
 
 //患者列表
