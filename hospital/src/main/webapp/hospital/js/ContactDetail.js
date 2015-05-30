@@ -2,7 +2,10 @@ $(document).ready(function () {
 
     var ContactId = ""
     if (GetQueryString("userId")) {
-        ContactId = GetQueryString("userId");
+        UserId = GetQueryString("userId");
+    }
+    if (GetQueryString("pid")) {
+        ContactId = GetQueryString("pid");
     }
     if (GetQueryString("action") == "add") {
         $(".btnAdd").css("display", "block");
@@ -14,7 +17,8 @@ $(document).ready(function () {
             url: "http: //110.249.163.146:8082/getListByAid",
             type: "GET",
             data: {
-                aid: ContactId,
+                aid: UserId,
+                pid: ContactId
             },
             contentType: "application/json",
             dataType: "json",

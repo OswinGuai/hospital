@@ -1,13 +1,15 @@
 $(document).ready(function () {
     var getDataStatus = "0";
     var result;
+    if (GetQueryString("userId")) {
+        UserId = GetQueryString("userId");
+    }
     $.ajax({
         //url 数据获取的目标地址
         url: "http: //110.249.163.146:8082/regiserPatient",
         type: "GET",
         data: {
-            parameterName1: "parameterValue1",
-            parameterName2: "parameterValue2"
+            aid: UserId
         },
         contentType: "application/json",
         dataType: "json",
