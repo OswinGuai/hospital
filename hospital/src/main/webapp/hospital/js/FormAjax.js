@@ -257,8 +257,8 @@ function FillSelectData(listid, data, value, text) {
 
     var displayText = "";
     var SelectValue = "";
-    var defaultSelectId = "";
     $(data).each(function (key) {
+        var defaultSelectId = "";
         displayText = data[key][text];
         SelectValue = data[key][value];
         if (key == 0) {
