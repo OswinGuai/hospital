@@ -53,8 +53,6 @@ $(document).ready(function () {
             idcard: "29348388384"
     }]
     };*/
-    GetContactsList($("#ContactList"), result.data, "name", "idcard", "id");
-
 
     //如果返回状态正常获取数据并操作
     if (getDataStatus == "0") {
