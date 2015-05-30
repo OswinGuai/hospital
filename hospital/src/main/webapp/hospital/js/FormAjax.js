@@ -36,6 +36,19 @@ $(document).ready(function () {
                         result = dataResult.data;
                     }
                 }
+                //如果返回状态正常获取数据并操作
+                var suffererList = $("#SufferersList");
+                //获取Sufferer数据填充下拉列表
+                FillSelectData(suffererList, result, "id", "name");
+                //通过隐藏域取值
+                $(suffererList).change(function () {
+                    //取得选中的文本值
+                    var selectText = $(this).find("option:selected").text();
+                    $("#suffererCurr").attr("data-value", selectText);
+                    //获取选中的value值
+                    var selectVlaue = $(this).find("option:selected").val();
+                    $("#suffererCurr").attr("data-key", selectVlaue);
+                });
             } else {
                 getDataStatus = 1;
                 alert(dataResult.msg);
@@ -52,22 +65,6 @@ $(document).ready(function () {
             idcard: "29348388384"
     }]
     };*/
-
-    //如果返回状态正常获取数据并操作
-    if (getDataStatus == 0) {
-        var suffererList = $("#SufferersList");
-        //获取Sufferer数据填充下拉列表
-        FillSelectData(suffererList, result, "id", "name");
-        //通过隐藏域取值
-        $(suffererList).change(function () {
-            //取得选中的文本值
-            var selectText = $(this).find("option:selected").text();
-            $("#suffererCurr").attr("data-value", selectText);
-            //获取选中的value值
-            var selectVlaue = $(this).find("option:selected").val();
-            $("#suffererCurr").attr("data-key", selectVlaue);
-        });
-    }
 
     /*//患者列表测试数据结构
     var SuffererListResult = {

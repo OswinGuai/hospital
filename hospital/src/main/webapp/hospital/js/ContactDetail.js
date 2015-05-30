@@ -46,25 +46,25 @@ $(document).ready(function () {
                             result = dataResult.data;
                         }
                     }
+                    $("#ContactId").val(ContactId);
+                    var pName = "";
+                    var pIdCard = "";
+                    var pPhone = "";
+
+                    $(result).each(function (key) {
+                        pIdCard = result[key][idcard];
+                        pName = result[key][name];
+                        pPhone = result[key][cellphone];
+                    });
+                    $("#ContactName").val(pName);
+                    $("#ContactIdCard").val(pIdCard);
+                    $("#ContactPhone").val(pPhone);
                 } else {
                     getDataStatus = 1;
                     alert(dataResult.msg);
                 }
             }
         });
-        $("#ContactId").val(ContactId);
-        var pName = "";
-        var pIdCard = "";
-        var pPhone = "";
-
-        $(result).each(function (key) {
-            pIdCard = result[key][idcard];
-            pName = result[key][name];
-            pPhone = result[key][cellphone];
-        });
-        $("#ContactName").val(pName);
-        $("#ContactIdCard").val(pIdCard);
-        $("#ContactPhone").val(pPhone);
         $(".btnModify").css("display", "block");
         $(".btnDelete").css("display", "block");
     }

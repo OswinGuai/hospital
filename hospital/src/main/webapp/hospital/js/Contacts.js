@@ -29,13 +29,13 @@ $(document).ready(function () {
                         result = dataResult.data;
                     }
                 }
+                GetContactsList($("#ContactList"), result, "name", "idcard", "id");
             } else {
                 getDataStatus = 1;
                 alert(dataResult.msg);
             }
         }
     });
-    GetContactsList($("#ContactList"), result, "name", "idcard", "id");
 });
 
 //患者列表
