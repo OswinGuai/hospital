@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
 
     var ContactId = ""
     if (GetQueryString("aid")) {
@@ -7,7 +7,61 @@
     if (GetQueryString("action") == "add") {
         $(".btnAdd").css("display", "block");
     } else {
+        var getDataStatus = "0";
+        var result;
+        $.ajax({
+            //url 数据获取的目标地址
+            url: "http: //110.249.163.146:8082/getListByAid?aid=" + ContactId,
+            type: "GET",
+            data: {
+                parameterName1: "parameterValue1",
+                parameterName2: "parameterValue2"
+            },
+            contentType: "application/json",
+            dataType: "json",
+            success: function (dataResult) {
+                /*//Data 标准格式
+                var data = {
+                    status: 0,
+                    msg: "",
+                    data: {
+                    }
+                }*/
+
+                //返回状态正常执行True，状态异常执行False
+                if (dataResult.status == "0") {
+                    if (typeof (dataResult.data) == "string") {
+                        result = data;
+                        ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
+                        ////将数据转成Json对象
+                        ////var result = ParseJson(data);
+                    } else if (typeof (dataResult.data) == "object") {
+                        //当data是数组时执行True,是Json时执行False
+                        if (dataResult.data instanceof Array) {
+
+                        } else {
+                            result = data;
+                        }
+                    }
+                } else {
+                    getDataStatus = "1";
+                    alert(dataResult.msg);
+                }
+            }
+        });
         $("#ContactId").val(ContactId);
+        var pName = "";
+        var pIdCard = "";
+        var pPhone = "";
+
+        $(data).each(function (key) {
+            pIdCard = data[key][idcard];
+            pName = data[key][name];
+            pPhone = data[key][valcellphoneue];
+        });
+        $("#ContactName").val(pName);
+        $("#ContactIdCard").val(pIdCard);
+        $("#ContactPhone").val(pPhone);
         $(".btnModify").css("display", "block");
         $(".btnDelete").css("display", "block");
     }
@@ -25,19 +79,21 @@ function AddContact() {
         "cellphone": ContactPhone
     };
     var param = JSON.stringify(NewContact);
-    NewContact = {"pinfo":param};
+    NewContact = {
+        "pinfo": param
+    };
     /*alert(NewContact);*/
- Validata(document.getElementById("ContactIdCard"));
+    Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
-            url: "http://110.249.163.146:8081/regiserPatient",
+            url: "http://110.249.163.146:8082/regiserPatient",
             data: NewContact,
             type: "Get",
             dataType: 'json',
             success: function (msg) {
                 if (msg.status == 0) {
-                	alert(msg.data);
-                	window.history.back();
+                    alert(msg.data);
+                    window.history.back();
                 } else {
                     //console.log('添加失败')
                 }
@@ -78,7 +134,7 @@ function ModifyContact() {
         "ContactIdCard": ContactIdCard,
         "ContactPhone": ContactPhone
     };
- Validata(document.getElementById("ContactIdCard"));
+    Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
             url: "",
