@@ -46,8 +46,8 @@ $(document).ready(function () {
                     var selectText = $(this).find("option:selected").text();
                     $("#suffererCurr").attr("data-value", selectText);
                     //获取选中的value值
-                    var selectVlaue = $(this).find("option:selected").val();
-                    $("#suffererCurr").attr("data-key", selectVlaue);
+                    var selectValue = $(this).find("option:selected").val();
+                    $("#suffererCurr").attr("data-key", selectValue);
                 });
             } else {
                 getDataStatus = 1;
@@ -109,7 +109,7 @@ $(document).ready(function () {
                     $("#departmentCurr").attr("data-value", selectText);
                     //获取选中的value值
                     var selectValue = $(this).find("option:selected").val();
-                    $("#departmentCurr").attr("data-key", selectVlaue);
+                    $("#departmentCurr").attr("data-key", selectValue);
                     $.ajax({
                         //url 数据获取的目标地址
                         url: "backend/subTypes",
@@ -153,8 +153,8 @@ $(document).ready(function () {
                                     var selectText = $(this).find("option:selected").text();
                                     $("#SectionCurr").attr("data-value", selectText);
                                     //获取选中的value值
-                                    var selectVlaue = $(this).find("option:selected").val();
-                                    $("#SectionCurr").attr("data-key", selectVlaue);
+                                    var selectValue = $(this).find("option:selected").val();
+                                    $("#SectionCurr").attr("data-key", selectValue);
                                 });
                             } else {
                                 getDataStatus = 1;
