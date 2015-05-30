@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var UserId = "";
     var getDataStatus = 0;
     var result;
     if (GetQueryString("userId")) {
