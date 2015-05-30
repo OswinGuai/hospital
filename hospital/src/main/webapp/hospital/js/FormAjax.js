@@ -108,7 +108,7 @@ $(document).ready(function () {
                     var selectText = $(this).find("option:selected").text();
                     $("#departmentCurr").attr("data-value", selectText);
                     //获取选中的value值
-                    var selectVlaue = $(this).find("option:selected").val();
+                    var selectValue = $(this).find("option:selected").val();
                     $("#departmentCurr").attr("data-key", selectVlaue);
                     $.ajax({
                         //url 数据获取的目标地址
@@ -116,7 +116,7 @@ $(document).ready(function () {
                         type: "GET",
                         data: {
                             aid: UserId,
-                            parentId: selectVlaue
+                            parentId: selectValue
                         },
                         contentType: "application/json",
                         dataType: "json",
@@ -146,7 +146,7 @@ $(document).ready(function () {
                                 //如果返回状态正常获取数据并操作
                                 var sectionList = $("#SectionList");
                                 //获取Sufferer数据填充下拉列表
-                                FillSelectData(sectionList, result, "id", "name");
+                                FillSelectData(sectionList, result, "id", "typename");
                                 //通过隐藏域取值
                                 $(sectionList).change(function () {
                                     //取得选中的文本值
