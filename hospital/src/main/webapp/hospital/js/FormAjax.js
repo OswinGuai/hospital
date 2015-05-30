@@ -115,7 +115,7 @@ $(document).ready(function () {
                         url: "backend/subTypes",
                         type: "GET",
                         data: {
-                            aid: UserId，
+                            aid: UserId,
                             parentId: selectVlaue;
                         },
                         contentType: "application/json",
