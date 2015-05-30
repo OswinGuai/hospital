@@ -6,6 +6,8 @@ package com.alipay.servlet.gateway;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,11 +15,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.constants.AlipayServiceEnvConstants;
 import com.alipay.dispatcher.Dispatcher;
 import com.alipay.executor.ActionExecutor;
+import com.alipay.util.ComparatorUtil;
 import com.alipay.util.LogUtil;
 import com.alipay.util.RequestUtil;
 
@@ -82,6 +90,22 @@ public class GatewayServlet extends HttpServlet {
         } finally {
             //5. 响应结果加签及返回
             try {
+                try {
+                    Document doc = DocumentHelper.parseText(responseMsg);
+                    Element root = doc.getRootElement();
+                    Comparator<Element> comparator = ComparatorUtil.getDocComparator();
+                    List<Element> elements = root.elements(); 
+                    elements.sort(comparator);
+                    root.setContent(elements);
+                    doc.setRootElement(root);
+                    responseMsg = root.asXML();
+                } catch (DocumentException e) {
+                    /**
+                     * 
+                     */
+                    System.err.println("返回结果的xml内容转换失败，暂时忽略");
+                }
+                
                 //对响应内容加签
                 responseMsg = AlipaySignature.encryptAndSign(responseMsg,
                     AlipayServiceEnvConstants.ALIPAY_PUBLIC_KEY,

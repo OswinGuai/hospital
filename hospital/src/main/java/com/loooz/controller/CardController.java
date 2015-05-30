@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.loooz.exception.BaseException;
 import com.loooz.exception.CardOperationException;
@@ -40,6 +41,12 @@ public class CardController {
             return ResultUtil.parseToView(e);
         }
         return ResultUtil.parseToView("");
+    }
+	
+	@RequestMapping(value = "recharge/{patientId}", method = RequestMethod.GET)
+    public ModelAndView rechargeCard(@PathVariable("patientId") long patientId) {
+	    
+        return new ModelAndView("redirect:http://www.baidu.com");
     }
 	
 }

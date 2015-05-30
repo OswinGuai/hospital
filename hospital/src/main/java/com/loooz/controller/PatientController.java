@@ -3,12 +3,11 @@ package com.loooz.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import net.sf.json.JSONObject;
 
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,8 +62,8 @@ public class PatientController {
         return res;
     }
     
-    @RequestMapping(value="/getPatientById/{pid}",method=RequestMethod.GET)
-    public @ResponseBody JsonResult getPatientInfo(@PathVariable("pid") long pid){
+    @RequestMapping(value="/getPatientById",method=RequestMethod.GET)
+    public @ResponseBody JsonResult getPatientInfo(@RequestParam("pid") long pid){
         
         Patient patient = patientService.getPatientById(pid);
         JsonResult res = ResultUtil.parseToView(patient);
@@ -94,8 +93,8 @@ public class PatientController {
        return res;
     }
     
-    @RequestMapping(value="/getListByAid/{aid}")
-    public @ResponseBody JsonResult getPatientListByAid(@PathVariable("aid")String aid){
+    @RequestMapping(value="/getListByAid", method=RequestMethod.GET)
+    public @ResponseBody JsonResult getPatientListByAid(@RequestParam("aid")String aid){
         System.out.println(aid);
         Assert.notNull(aid, "aid为空");
         Assert.hasLength(aid, "aid不能为空");
