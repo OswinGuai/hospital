@@ -294,11 +294,11 @@ function SaveData() {
     var sectionId = $("#SectionCurr").attr("data-key");
     $.ajax({
         //url 将数据提交给服务器端
-        url: "",
+        url: "backend/registration",
         type: "GET",
         data: {
             pid: suffererId,
-            typeId: sectionId
+            type: sectionId
         },
         contentType: "application/json",
         dataType: "json",
