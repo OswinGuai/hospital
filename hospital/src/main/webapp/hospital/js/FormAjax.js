@@ -24,16 +24,16 @@ $(document).ready(function () {
             //返回状态正常执行True，状态异常执行False
             if (dataResult.status == "0") {
                 if (typeof (dataResult.data) == "string") {
-                    result = data;
+                    result = dataResult.data;
                     ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
                     ////将数据转成Json对象
                     ////var result = ParseJson(data);
                 } else if (typeof (dataResult.data) == "object") {
                     //当data是数组时执行True,是Json时执行False
                     if (dataResult.data instanceof Array) {
-                        result = data;
+                        result = dataResult.data;
                     } else {
-                        result = data;
+                        result = dataResult.data;
                     }
                 }
             } else {
