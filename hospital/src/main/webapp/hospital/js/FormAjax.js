@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var getDataStatus = "0";
+    var getDataStatus = "1";
     var result;
     if (GetQueryString("userId")) {
         UserId = GetQueryString("userId");
     }
     $.ajax({
         //url 数据获取的目标地址
-        url: "http: //110.249.163.146:8082/regiserPatient",
+        url: "http: //110.249.163.146:8082/getListByAid",
         type: "GET",
         data: {
             aid: UserId
@@ -21,7 +21,6 @@ $(document).ready(function () {
                 data: {
                 }
             }*/
-
             //返回状态正常执行True，状态异常执行False
             if (dataResult.status == "0") {
                 if (typeof (dataResult.data) == "string") {
