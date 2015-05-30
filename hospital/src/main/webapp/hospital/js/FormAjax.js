@@ -3,7 +3,7 @@ $(document).ready(function () {
     var result;
     $.ajax({
         //url 数据获取的目标地址
-        url: "",
+        url: "http: //110.249.163.146:8082/regiserPatient",
         type: "GET",
         data: {
             parameterName1: "parameterValue1",
@@ -41,8 +41,7 @@ $(document).ready(function () {
             }
         }
     });
-
-    result = {
+    /*result = {
         "status": "0",
         "msg": "sucess",
         "data": [{
@@ -50,16 +49,16 @@ $(document).ready(function () {
             name: "dfjak",
             cellphone: "1818181818",
             idcard: "29348388384"
-}]
-    };
- GetContactsList($("#ContactList"), result.data, "name", "idcard", "id");
+    }]
+    };*/
+    GetContactsList($("#ContactList"), result.data, "name", "idcard", "id");
 
 
     //如果返回状态正常获取数据并操作
     if (getDataStatus == "0") {
         var suffererList = $("#SufferersList");
         //获取Sufferer数据填充下拉列表
-        FillSelectData(suffererList, result, "data", "id", "name");
+        FillSelectData(suffererList, result.data, "id", "name");
         //通过隐藏域取值
         $(suffererList).change(function () {
             //取得选中的文本值
@@ -216,7 +215,7 @@ function Validata(obj) {
 
 
 //填充下拉列表数据（select id,数据源，json指定对象，key，value）
-function FillSelectData(listid, data, object, value, text) {
+function FillSelectData(listid, data, value, text) {
     //清空Select ListItem
     RemoveOption(listid);
 
@@ -226,9 +225,9 @@ function FillSelectData(listid, data, object, value, text) {
     var displayText = "";
     var SelectValue = "";
 
-    $(data[object]).each(function (key) {
-        displayText = data[object][key][text];
-        SelectValue = data[object][key][value];
+    $(data).each(function (key) {
+        displayText = data[key][text];
+        SelectValue = data[key][value];
         AppendOption($(listid), SelectValue, displayText);
     });
 }
@@ -261,21 +260,6 @@ function SaveData() {
 
 }
 
-
-//患者列表
-function GetContactsList(listid, data, name, IdCard, id) {
-    //清空Contacts ListItem
-    RemoveContacts(listid);
-
-    var ContactName = "";
-    var ContactPhone = "";
-    $(data).each(function (key) {
-        //添加联系人
-        ContactName = data[key][name];
-        ContactIdCard = data[key][IdCard];
-        listid.append("<li><a href='ContactDetail.html?ContactId=" + data[key][id] + "&action=view'><span class='ContactName'>" + ContactName + "</span><span class='ContactIdCard'>" + ContactIdCard.substring(0, 4) + "****" + ContactIdCard.substring(ContactIdCard.length - 4, ContactIdCard.length) + "</span></a></li>");
-    });
-}
 
 //清空患者列表
 function RemoveContacts(listid) {
