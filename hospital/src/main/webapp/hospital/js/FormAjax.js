@@ -101,7 +101,7 @@ $(document).ready(function () {
                 //如果返回状态正常获取数据并操作
                 var departmentList = $("#DepartmentList");
                 //获取Sufferer数据填充下拉列表
-                FillSelectData(departmentList, result, "id", "typename");
+                FillSelectData(departmentList, result, "id", "typeName");
                 //通过隐藏域取值
                 $(departmentList).change(function () {
                     //取得选中的文本值
@@ -146,7 +146,7 @@ $(document).ready(function () {
                                 //如果返回状态正常获取数据并操作
                                 var sectionList = $("#SectionList");
                                 //获取Sufferer数据填充下拉列表
-                                FillSelectData(sectionList, result, "id", "typename");
+                                FillSelectData(sectionList, result, "id", "typeName");
                                 //通过隐藏域取值
                                 $(sectionList).change(function () {
                                     //取得选中的文本值
