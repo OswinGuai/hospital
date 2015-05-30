@@ -288,7 +288,7 @@ function AppendOption(ListId, value, displayText, defaultSelectId) {
 function SaveData() {
     var suffererId = $("#suffererCurr").attr("data-key");
     var departmentId = $("#departmentCurr").attr("data-key");
-    var sectionId = $("SectionCurr").attr("data-key");
+    var sectionId = $("#SectionCurr").attr("data-key");
     $.ajax({
         //url 将数据提交给服务器端
         url: "",
