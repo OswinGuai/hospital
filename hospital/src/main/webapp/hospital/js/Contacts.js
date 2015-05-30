@@ -1,4 +1,4 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var getDataStatus = 0;
     var result;
     if (GetQueryString("userId")) {
@@ -6,7 +6,7 @@ $(document).ready(function () {
     }
     $.ajax({
         //url 数据获取的目标地址
-        url: "getListByAid",
+        url: "backend/getListByAid",
         type: "GET",
         data: {
             aid: UserId

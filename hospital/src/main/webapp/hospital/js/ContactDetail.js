@@ -1,4 +1,4 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     var ContactId = ""
     if (GetQueryString("userId")) {
@@ -14,7 +14,7 @@ $(document).ready(function () {
         var result;
         $.ajax({
             //url 数据获取的目标地址
-            url: "getListByAid",
+            url: "backend/getListByAid",
             type: "GET",
             data: {
                 aid: UserId,
@@ -89,7 +89,7 @@ function AddContact() {
     Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
-            url: "http://110.249.163.146:8082/regiserPatient",
+            url: "backend/regiserPatient",
             data: NewContact,
             type: "Get",
             dataType: 'json',
