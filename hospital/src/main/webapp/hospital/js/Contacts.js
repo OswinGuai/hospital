@@ -24,7 +24,7 @@ $(document).ready(function () {
                 } else if (typeof (dataResult.data) == "object") {
                     //当data是数组时执行True,是Json时执行False
                     if (dataResult.data instanceof Array) {
-
+                        result = data;
                     } else {
                         result = data;
                     }
