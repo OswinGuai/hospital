@@ -1,8 +1,8 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     var ContactId = ""
-    if (GetQueryString("ContactId")) {
-        ContactId = GetQueryString("ContactId");
+    if (GetQueryString("aid")) {
+        ContactId = GetQueryString("aid");
     }
     if (GetQueryString("action") == "add") {
         $(".btnAdd").css("display", "block");
@@ -26,7 +26,8 @@ function AddContact() {
     };
     var param = JSON.stringify(NewContact);
     NewContact = {"pinfo":param};
-    alert(NewContact);
+    /*alert(NewContact);*/
+ Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
             url: "http://110.249.163.146:8081/regiserPatient",
@@ -77,7 +78,7 @@ function ModifyContact() {
         "ContactIdCard": ContactIdCard,
         "ContactPhone": ContactPhone
     };
-
+ Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
             url: "",
