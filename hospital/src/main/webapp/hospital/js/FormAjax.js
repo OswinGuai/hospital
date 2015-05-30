@@ -6,7 +6,7 @@ $(document).ready(function () {
     }
     $.ajax({
         //url 数据获取的目标地址
-        url: "getListByAid",
+        url: "backend/getListByAid",
         type: "GET",
         data: {
             aid: UserId
@@ -66,73 +66,110 @@ $(document).ready(function () {
     }]
     };*/
 
-    /*//患者列表测试数据结构
-    var SuffererListResult = {
-        "sufferers": [{
-                "SuffererId": "1",
-                "SuffererName": "阿呆",
-                "SuffererPhone": "15012345671",
-                "SuffererIdCard": "123456789014785236"
+    $.ajax({
+        //url 数据获取的目标地址
+        url: "backend/rootTypes",
+        type: "GET",
+        data: {
+            aid: UserId
+        },
+        contentType: "application/json",
+        dataType: "json",
+        success: function (dataResult) {
+            /*//Data 标准格式
+            var data = {
+                status: 0,
+                msg: "",
+                data: {
+                }
+            }*/
+            //返回状态正常执行True，状态异常执行False
+            if (dataResult.status == 0) {
+                if (typeof (dataResult.data) == "string") {
+                    result = dataResult.data;
+                    ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
+                    ////将数据转成Json对象
+                    ////var result = ParseJson(data);
+                } else if (typeof (dataResult.data) == "object") {
+                    //当data是数组时执行True,是Json时执行False
+                    if (dataResult.data instanceof Array) {
+                        result = dataResult.data;
+                    } else {
+                        result = dataResult.data;
                     }
-                        , {
-                "SuffererId": "2",
-                "SuffererName": "阿瓜",
-                "SuffererPhone": "15012345671",
-                "SuffererIdCard": "123456789014785236"
+                }
+                //如果返回状态正常获取数据并操作
+                var departmentList = $("#DepartmentList");
+                //获取Sufferer数据填充下拉列表
+                FillSelectData(departmentList, result, "id", "typename");
+                //通过隐藏域取值
+                $(departmentList).change(function () {
+                    //取得选中的文本值
+                    var selectText = $(this).find("option:selected").text();
+                    $("#departmentCurr").attr("data-value", selectText);
+                    //获取选中的value值
+                    var selectVlaue = $(this).find("option:selected").val();
+                    $("#departmentCurr").attr("data-key", selectVlaue);
+                    $.ajax({
+                        //url 数据获取的目标地址
+                        url: "backend/subTypes",
+                        type: "GET",
+                        data: {
+                            aid: UserId，
+                            parentId: selectVlaue;
+                        },
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (dataResult) {
+                            /*//Data 标准格式
+                            var data = {
+                                status: 0,
+                                msg: "",
+                                data: {
+                                }
+                            }*/
+                            //返回状态正常执行True，状态异常执行False
+                            if (dataResult.status == 0) {
+                                if (typeof (dataResult.data) == "string") {
+                                    result = dataResult.data;
+                                    ////如果从服务器端接收到的是字符串类型的JSON并不是JSON类型,则需要执行ParseJson方法
+                                    ////将数据转成Json对象
+                                    ////var result = ParseJson(data);
+                                } else if (typeof (dataResult.data) == "object") {
+                                    //当data是数组时执行True,是Json时执行False
+                                    if (dataResult.data instanceof Array) {
+                                        result = dataResult.data;
+                                    } else {
+                                        result = dataResult.data;
+                                    }
+                                }
+                                //如果返回状态正常获取数据并操作
+                                var sectionList = $("#SectionList");
+                                //获取Sufferer数据填充下拉列表
+                                FillSelectData(sectionList, result, "id", "name");
+                                //通过隐藏域取值
+                                $(sectionList).change(function () {
+                                    //取得选中的文本值
+                                    var selectText = $(this).find("option:selected").text();
+                                    $("#SectionCurr").attr("data-value", selectText);
+                                    //获取选中的value值
+                                    var selectVlaue = $(this).find("option:selected").val();
+                                    $("#SectionCurr").attr("data-key", selectVlaue);
+                                });
+                            } else {
+                                getDataStatus = 1;
+                                alert(dataResult.msg);
+                            }
+                        }
+                    });
 
-                    }
-                        , {
-                "SuffererId": "3",
-                "SuffererName": "阿国",
-                "SuffererPhone": "15012345671",
-                "SuffererIdCard": "123456789014785236"
-                    }]
-    };
-
-    var suffererList = $("#SufferersList");
-    //获取Sufferer数据填充下拉列表
-    FillSelectData(suffererList, SuffererListResult, "sufferers", "SuffererId", "SuffererName");
-    //通过隐藏域取值
-    $(suffererList).change(function () {
-        //取得选中的文本值
-        var selectText = $(this).find("option:selected").text();
-        $("#suffererCurr").attr("data-value", selectText);
-        //获取选中的value值
-        var selectVlaue = $(this).find("option:selected").val();
-        $("#suffererCurr").attr("data-key", selectVlaue);
+                });
+            } else {
+                getDataStatus = 1;
+                alert(dataResult.msg);
+            }
+        }
     });
-
-    //科室列表一级菜单测试数据结构
-    var DepartmentListResult = {
-        "Departments": [{
-                "DepartmentId": "1",
-                "DepartmentName": "非手术科"
-                    }
-                        , {
-                "DepartmentId": "2",
-                "DepartmentName": "手术科"
-                    }
-                        , {
-                "DepartmentId": "3",
-                "DepartmentName": "其他科室"
-                    }]
-    };
-
-    var departmentList = $("#DepartmentList");
-    //填充下拉列表数据（select id,数据源，json指定对象，key，value）
-    FillSelectData(departmentList, DepartmentListResult, "Departments", "DepartmentId", "DepartmentName");
-    //通过隐藏域取值
-    $(departmentList).change(function () {
-        //取得选中的文本值
-        var selectText = $(this).find("option:selected").text();
-        $("#departmentCurr").attr("data-value", selectText);
-        //获取选中的value值
-        var selectVlaue = $(this).find("option:selected").val();
-        $("#departmentCurr").attr("data-key", selectVlaue);
-    });
-
-    var contactList = $("#ContactList");
-    GetContactsList(contactList, SuffererListResult, "sufferers", "SuffererName", "SuffererPhone", "SuffererId");*/
 
 });
 
@@ -210,21 +247,24 @@ function Validata(obj) {
 };
 
 
-//填充下拉列表数据（select id,数据源，json指定对象，key，value）
+//填充下拉列表数据（select id,数据源，json指定对象，key，value,默认值）
 function FillSelectData(listid, data, value, text) {
     //清空Select ListItem
     RemoveOption(listid);
 
-    //添加默认节点
-    listid.append("<option value='-1'>--请选择--</option>");
+    /*    //添加默认节点
+        listid.append("<option value='-1'>--请选择--</option>");*/
 
     var displayText = "";
     var SelectValue = "";
-
+    var defaultSelectId = "";
     $(data).each(function (key) {
         displayText = data[key][text];
         SelectValue = data[key][value];
-        AppendOption($(listid), SelectValue, displayText);
+        if (key == 0) {
+            defaultSelectId = SelectValue;
+        }
+        AppendOption($(listid), SelectValue, displayText, defaultSelectId);
     });
 }
 
@@ -235,8 +275,13 @@ function RemoveOption(ListId) {
 }
 
 //给指定的 Select 添加键值
-function AppendOption(ListId, value, displayText) {
-    ListId.append("<option value='" + value + "'>" + displayText + "</option>");
+function AppendOption(ListId, value, displayText, defaultSelectId) {
+    if (value == dafaultSelectId && ListId.Attr("id") == "DepartmentList") {
+        ListId.append("<option selected='selected' value='" + value + "'>" + displayText + "</option>");
+    } else {
+        ListId.append("<option value='" + value + "'>" + displayText + "</option>");
+    }
+
 }
 
 //提交挂号页面表单
