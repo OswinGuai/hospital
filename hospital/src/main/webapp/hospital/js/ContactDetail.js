@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     var ContactId = ""
-    if (GetQueryString("aid")) {
-        ContactId = GetQueryString("aid");
+    if (GetQueryString("userId")) {
+        ContactId = GetQueryString("userId");
     }
     if (GetQueryString("action") == "add") {
         $(".btnAdd").css("display", "block");
@@ -11,11 +11,10 @@ $(document).ready(function () {
         var result;
         $.ajax({
             //url 数据获取的目标地址
-            url: "http: //110.249.163.146:8082/getListByAid?aid=" + ContactId,
+            url: "http: //110.249.163.146:8082/getListByAid",
             type: "GET",
             data: {
-                parameterName1: "parameterValue1",
-                parameterName2: "parameterValue2"
+                aid: ContactId,
             },
             contentType: "application/json",
             dataType: "json",
