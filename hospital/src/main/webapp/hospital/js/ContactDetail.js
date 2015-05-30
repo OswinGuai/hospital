@@ -131,7 +131,7 @@ function ModifyContact() {
     var ContactName = $("#ContactName").val();
     var ContactIdCard = $("#ContactIdCard").val();
     var ContactPhone = $("#ContactPhone").val();
-    var NewContact = {
+    var info = {
         "ContactId": ContactId,
         "ContactName": ContactName,
         "ContactIdCard": ContactIdCard,
@@ -140,8 +140,8 @@ function ModifyContact() {
     Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
-            url: "",
-            data: NewContact,
+            url: "backend/alertPatient",
+            data: info,
             type: "GET",
             dataType: 'text',
             success: function (msg) {
