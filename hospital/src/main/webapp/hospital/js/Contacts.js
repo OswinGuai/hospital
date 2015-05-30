@@ -52,3 +52,11 @@ function GetContactsList(listid, data, name, IdCard, id) {
         listid.append("<li><a href='ContactDetail.html?ContactId=" + data[key][id] + "&action=view'><span class='ContactName'>" + ContactName + "</span><span class='ContactIdCard'>" + ContactIdCard.substring(0, 4) + "****" + ContactIdCard.substring(ContactIdCard.length - 4, ContactIdCard.length) + "</span></a></li>");
     });
 }
+
+//获取URL参数
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
