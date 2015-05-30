@@ -49,6 +49,7 @@ $(document).ready(function () {
                     var selectValue = $(this).find("option:selected").val();
                     $("#suffererCurr").attr("data-key", selectValue);
                 });
+                $(suffererList).trigger("change");
             } else {
                 getDataStatus = 1;
                 alert(dataResult.msg);
@@ -156,6 +157,7 @@ $(document).ready(function () {
                                     var selectValue = $(this).find("option:selected").val();
                                     $("#SectionCurr").attr("data-key", selectValue);
                                 });
+                                $(sectionList).trigger("change");
                             } else {
                                 getDataStatus = 1;
                                 alert(dataResult.msg);
