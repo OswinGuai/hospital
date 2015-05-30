@@ -116,7 +116,7 @@ $(document).ready(function () {
                         type: "GET",
                         data: {
                             aid: UserId,
-                            parentId: selectVlaue;
+                            parentId: selectVlaue
                         },
                         contentType: "application/json",
                         dataType: "json",
