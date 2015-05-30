@@ -6,7 +6,7 @@ $(document).ready(function () {
     }
     $.ajax({
         //url 数据获取的目标地址
-        url: "http: //110.249.163.146:8082/getListByAid",
+        url: "getListByAid",
         type: "GET",
         data: {
             aid: UserId
