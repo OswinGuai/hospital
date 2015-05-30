@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-
+$(document).ready(function () {
+    var UserId = "";
     var ContactId = ""
     if (GetQueryString("userId")) {
         UserId = GetQueryString("userId");
@@ -146,9 +146,9 @@ function ModifyContact() {
             dataType: 'text',
             success: function (msg) {
                 if (msg == '1') {
-                    //console.log('修改成功');
+                    alert('修改成功');
                 } else {
-                    //console.log('修改失败')
+                    alert('修改失败')
                 }
             }
         });
