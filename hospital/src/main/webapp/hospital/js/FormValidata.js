@@ -56,7 +56,7 @@
             }
         };
 
-        oBtn.onclick = function () {
+        oTxt.onblur = function () {
             var sIdCard = oTxt.value.replace(/^\s+|\s+$/g, ""); //去除字符串的前后空格，允许用户不小心输入前后空格
             if (sIdCard.match(/^\d{14,17}(\d|X)$/gi) == null) { //判断是否全为18或15位数字，最后一位可以是大小写字母X
                 alert("身份证号码须为18位或15位数字"); //允许用户输入大小写X代替罗马数字的Ⅹ
