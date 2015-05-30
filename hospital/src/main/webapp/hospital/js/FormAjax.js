@@ -39,7 +39,7 @@ $(document).ready(function () {
                 //如果返回状态正常获取数据并操作
                 var suffererList = $("#SufferersList");
                 //获取Sufferer数据填充下拉列表
-                FillSelectData(suffererList, result, "aid", "name");
+                FillSelectData(suffererList, result, "pid", "name");
                 //通过隐藏域取值
                 $(suffererList).change(function () {
                     //取得选中的文本值
@@ -164,6 +164,7 @@ $(document).ready(function () {
                     });
 
                 });
+                $(departmentList).trigger("change");
             } else {
                 getDataStatus = 1;
                 alert(dataResult.msg);
@@ -293,10 +294,23 @@ function SaveData() {
         //url 将数据提交给服务器端
         url: "",
         type: "GET",
+        data: {
+            pid: suffererId,
+            typeId: sectionId
+        },
         contentType: "application/json",
         dataType: "json",
-        success: function (data) {
-            $(".Success").css("display", "block");
+        success: function (dataResult) {
+            $("#Success").css("display", "block");
+            var name = "";
+            var location = "";
+            if (dataResult[data][name] != null) {
+                name = dataResult[data][name];
+            }
+            if (dataResult[data][location] != null) {
+                location = dataResult[data][location];
+            }
+            $("#Success").append("请" + name + "到" + location + "及时就诊。");
         }
     });
 
