@@ -307,11 +307,11 @@ function SaveData() {
             $("#Success").css("display", "block");
             var name = "";
             var location = "";
-            if (dataResult[data][name] != null) {
-                name = dataResult[data][name];
+            if (dataResult.data.name != null) {
+                name = dataResult.data.name;
             }
-            if (dataResult[data][location] != null) {
-                location = dataResult[data][location];
+            if (dataResult.data.location != null) {
+                location = dataResult.data.location;
             }
             $("#Success").append("请" + name + "到" + location + "及时就诊。");
         }
