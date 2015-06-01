@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loooz.dao.DiagnoseRecordMapper">
+	<resultMap type="com.loooz.bo.DiagnoseRecord" id="DiagnoseRecordResult">
+		<id property="rid" column="record_id" />
+		<result property="start_time"  column="start_time" />
+		<result property="end_time"  column="end_time" />
+		<result property="state"  column="state" />
+		<result property="pid"  column="patient_id" />
+		<result property="diagnose_type"  column="diagnose_type" />
+	</resultMap>
+	<sql id="DiagnoseRecord_Column_List">
+		record_id, start_time, end_time, state, patient_id,diagnose_type
+	</sql>
+		
+	<insert id="regisertion" parameterType="com.loooz.bo.DiagnoseRecord" >
+		insert into diagnose_record (<include refid="DiagnoseRecord_Column_List"></include>)
+		values(
+		#{rid,jdbcType=BIGINT},
+		#{start_time,jdbcType=TIMESTAMP},
+		#{end_time,jdbcType=TIMESTAMP},
+		#{state,jdbcType=INTEGER},
+		#{pid,jdbcType=BIGINT},
+		#{diagnose_type,jdbcType=INTEGER})
+	</insert>
+	
+	<update id="updateDiagnoseDone" parameterType="com.loooz.bo.DiagnoseRecord">
+		update diagnose_record  set
+		end_time = #{end_time,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=INTEGER}
+		where record_id =#{rid,jdbcType=BIGINT}
+	</update>
+	
+	<select id="getDiagnoseRecord" parameterType="long" resultMap="DiagnoseRecordResult">
+		select 
+		<include refid="DiagnoseRecord_Column_List"></include>
+		from diagnose_record where record_id = #{rid,jdbcType=BIGINT}
+	</select>
+	
+</mapper>

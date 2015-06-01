@@ -20,6 +20,8 @@ public enum ErrorInfo {
 	NON_EXIST_DIAGNOSE_RECORD(4001,"就诊记录不存在");
 	
 	
+	
+	
 	private int errorCode;
 	private String msg;
 	

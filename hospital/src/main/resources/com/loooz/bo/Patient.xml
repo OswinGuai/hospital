@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.loooz.dao.PatientMapper">
-    <resultMap type="Patient" id="PatientResult">
+    <resultMap type="com.loooz.bo.Patient" id="PatientResult">
         <id column="patient_id" property="pid" />
         <result column="name" property="name" />
         <result column="idcard" property="idcard" />
@@ -20,7 +20,7 @@
     </select>
     
     <insert id="addPatient" parameterType="com.loooz.bo.Patient">		
-    	insert into patient (patient_id , alipay_id, name, idcard, cellphone)
+    	insert into patient (<include refid="Patient_Column_List"></include>)
 		values (
 		#{pid,jdbcType=BIGINT},
 		#{aid,jdbcType=VARCHAR},

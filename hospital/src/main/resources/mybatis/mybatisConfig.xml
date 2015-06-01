@@ -11,6 +11,7 @@
         <mapper resource="com/loooz/bo/User.xml"/>
         <mapper resource="com/loooz/bo/Patient.xml"/>
         <mapper resource="com/loooz/bo/PatientCardBindMapper.xml"/>
+        <mapper resource="com/loooz/bo/DiagnoseRecord.xml"/> 
         <mapper resource="com/loooz/bo/DiagnoseTypeMapper.xml"/>
     </mappers>
 </configuration>

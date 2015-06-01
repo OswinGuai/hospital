@@ -132,18 +132,24 @@ function ModifyContact() {
     var ContactIdCard = $("#ContactIdCard").val();
     var ContactPhone = $("#ContactPhone").val();
     var info = {
-        "ContactId": ContactId,
-        "ContactName": ContactName,
-        "ContactIdCard": ContactIdCard,
-        "ContactPhone": ContactPhone
+        "pid": ContactId,
+        "name": ContactName,
+        "idcard": ContactIdCard,
+        "cellphone": ContactPhone
     };
+    
+    var param = JSON.stringify(NewContact);
+    info = {
+        "info": param
+    };
+    
     Validata(document.getElementById("ContactIdCard"));
     if (ContactName != "" || ContactIdCard != "" || ContactPhone != "") {
         $.ajax({
             url: "backend/alertPatient",
             data: info,
             type: "GET",
-            dataType: 'text',
+            dataType: 'json',
             success: function (msg) {
                 if (msg == '1') {
                     alert('修改成功');
