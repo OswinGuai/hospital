@@ -50,7 +50,7 @@ public class PatientController {
     
     //注册
     // http://110.249.163.146:8081/Hospital/regiserPatient?info={name：？，cellphone：？，idcard:?,aid:?}
-    @RequestMapping(value = "/regiserPatient",method=RequestMethod.GET)
+    @RequestMapping(value = "/regiserPatient",method=RequestMethod.POST)
     public @ResponseBody JsonResult regiserPatinet(@RequestParam("pinfo")String patient){
         
         System.out.println("注册信息："+patient);

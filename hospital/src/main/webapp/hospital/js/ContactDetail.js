@@ -91,7 +91,7 @@ function AddContact() {
         $.ajax({
             url: "backend/regiserPatient",
             data: NewContact,
-            type: "Get",
+            type: "Post",
             dataType: 'json',
             success: function (msg) {
                 if (msg.status == 0) {
