@@ -15,6 +15,7 @@ public enum ErrorInfo {
 	ALIPAY_ID_EMPTY(2003,"用户支付宝ID不能为空"),
 	CANNOT_ADD_EXISTING_USER(2004,"不能添加已经存在的用户"),
 	CANNOT_REBIND_PATIENT(2005,"不能给患者重复绑定"),
+	HASNOT_BOUND_CARD(2006,"还未绑定就诊卡"),
 	CANNOT_ADD_PATIENT(3005,"注册不成功"),
     ADD_PATIENT_SUCCESS(3006,"注册成功"),
 	NON_EXIST_DIAGNOSE_RECORD(4001,"就诊记录不存在");

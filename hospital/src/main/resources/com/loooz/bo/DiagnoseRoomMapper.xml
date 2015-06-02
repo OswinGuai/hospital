@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loooz.dao.DiagnoseRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.loooz.bo.DiagnoseRoom" >
+    <id column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    room_id, name, location
+  </sql>
+  <sql id="Select_Room" >
+    select room.room_id, room.name, room.location
+    from diagnose_room as room
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <include refid="Select_Room" />
+    where room.room_id = #{roomId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByDirection" resultMap="BaseResultMap" >
+    <include refid="Select_Room" />
+    left join location_direction as direction on room.room_id = direction.room_id
+    where direction.procedure_type = #{procedureTypeId,jdbcType=INTEGER}
+    and ( 
+    	direction.diagnose_type = #{diagnoseTypeId,jdbcType=INTEGER}
+    	or
+    	direction.diagnose_type in (select id from diagnose_type 
+    									where parent_id = #{diagnoseTypeId,jdbcType=INTEGER})
+    	)
+  </select>
+</mapper>

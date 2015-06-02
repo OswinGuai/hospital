@@ -82,4 +82,13 @@ public class PatientCardBindServiceImpl implements PatientCardBindService {
         patientCardBindDao.updateBindRecordByKey(record);
 	}
 
+    @Override
+    public boolean hasBoundCard(long patientId) {
+        PatientCardBind bind = patientCardBindDao.selectBindRecordByPatientId(patientId);
+        if (bind != null && !StringUtils.isEmpty(bind.getCardId())) {
+            return true;
+        }
+        return false;
+    }
+
 }

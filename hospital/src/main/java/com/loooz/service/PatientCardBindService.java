@@ -20,4 +20,6 @@ public interface PatientCardBindService {
 	public Patient getBindPatient(long bindCode);
 	
 	public void bindCard(long bindCode, String cardId) throws CardOperationException;
+	
+	public boolean hasBoundCard(long patientId);
 }

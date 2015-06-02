@@ -1,17 +1,12 @@
 package com.loooz.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import net.sf.json.JSONObject;
-
-
-
-
-
-
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -22,15 +17,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.loooz.bo.DiagnoseRecord;
+import com.loooz.bo.DiagnoseRoom;
 import com.loooz.bo.Patient;
 import com.loooz.constants.DiagnoseState;
+import com.loooz.constants.ErrorInfo;
+import com.loooz.constants.ProcedureType;
 import com.loooz.exception.DiagnoseRecordException;
 import com.loooz.exception.PatientOperationException;
 import com.loooz.service.DiagnoseRecordService;
+import com.loooz.service.DiagnoseRoomService;
+import com.loooz.service.PatientCardBindService;
 import com.loooz.service.PatientService;
 import com.loooz.util.ResultUtil;
+import com.loooz.vo.GuideView;
 import com.loooz.vo.JsonResult;
-import com.sun.org.glassfish.gmbal.ParameterNames;
+import com.loooz.vo.PatientView;
 
 @Controller
 public class PatientController {
@@ -40,6 +41,12 @@ public class PatientController {
     
     @Resource
     private DiagnoseRecordService drService;
+    
+    @Resource
+    private DiagnoseRoomService roomService;
+    
+    @Resource
+    private PatientCardBindService cardService;
     
     //注册
     // http://110.249.163.146:8081/Hospital/regiserPatient?info={name：？，cellphone：？，idcard:?,aid:?}
@@ -121,8 +128,14 @@ public class PatientController {
         Assert.hasLength(aid, "aid不能为空");
         
         List<Patient> pListByAid = patientService.getPatientListByAid(aid);
-        
-        JsonResult res = ResultUtil.parseToView(pListByAid); 
+        List<PatientView> infos = new ArrayList<PatientView>();
+        for (Patient patient : pListByAid) {
+            boolean hasBound = cardService.hasBoundCard(patient.getPid());
+            PatientView view = (PatientView)patient;
+            view.setHasBoundCard(hasBound);
+            infos.add(view);
+        }
+        JsonResult res = ResultUtil.parseToView(infos); 
         
         return res;
     }
@@ -144,7 +157,34 @@ public class PatientController {
         dr.setState(DiagnoseState.REGISTRATION.getState());
         dr.setStart_time(new Date());
         drService.registrationService(dr);
-        JsonResult res = ResultUtil.parseToView("挂号成功");
+        
+        Patient patient = patientService.getPatientById(pid);
+        /**
+         * 检查病人是否存在
+         */
+        if (patient == null) {
+            return ResultUtil.parseToView(new PatientOperationException(ErrorInfo.NON_EXIST_PATIENT));
+        }
+        /**
+         * 检查病人是否绑定就诊卡
+         */
+        if (!cardService.hasBoundCard(pid)) {
+            return ResultUtil.parseToView(new PatientOperationException(ErrorInfo.HASNOT_BOUND_CARD));
+        }
+        /**
+         * 如果没有就诊的位置信息，使用默认的信息
+         */
+        DiagnoseRoom room = roomService.getRoomByDirection(type, ProcedureType.FIRST_CHECK);
+        if (room == null) {
+            room = DiagnoseRoom.getDefaultRoomInfo();
+        }
+        GuideView guideView = new GuideView();
+        guideView.setName(patient.getName());
+        guideView.setRoomName(room.getName());
+        guideView.setLocation(room.getLocation());
+        guideView.setProcedureName(ProcedureType.FIRST_CHECK.getTypeName());
+        
+        JsonResult res = ResultUtil.parseToView(guideView);
        
         return res;
     }
